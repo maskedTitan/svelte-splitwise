@@ -1,5 +1,11 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import Button from "../UI/Button.svelte";
+
+  const dispatch = createEventDispatcher();
+
+  export let friends;
+
   let fields = {
     event: "",
     amount: "",
@@ -34,7 +40,11 @@
       errors.amount = "";
     }
     if (isValid) {
-      console.log("valid");
+      let expense = {
+        ...fields,
+        id: Math.random() * Date.now()
+      };
+      dispatch("add-expense", expense);
     }
   };
 </script>
@@ -85,5 +95,12 @@
     <label for="description">Description</label>
     <textarea type="text" id="description" bind:value={fields.description} />
   </div>
+  <div class="form-field">
+    <label for="description">Friends</label>
+    {#each friends as friend}
+      <p>{friend.name}</p>
+    {/each}
+  </div>
+
   <Button type="secondary" flat>Add Expense</Button>
 </form>

@@ -3,11 +3,46 @@
   import Footer from "./UI/Footer.svelte";
   import Tabs from "./UI/Tabs.svelte";
   import CreateExpense from "./Expenses/CreateExpense.svelte";
+  import ExpenseList from "./Expenses/ExpenseList.svelte";
+
   let items = ["Current Expenses", "Add New Expense"];
   let activeItem = "Current Expenses";
 
   const tabChange = e => {
     activeItem = e.detail;
+  };
+  let friends = [
+    {
+      id: 1,
+      name: "John Doe"
+    },
+    {
+      id: 2,
+      name: "Brian"
+    },
+    {
+      id: 3,
+      name: "Harry"
+    }
+  ];
+  let expenses = [
+    {
+      id: Math.random() * Date.now(),
+      event: "Birthday Treat",
+      amount: 400,
+      description: "Treat for my 22nd Birthday"
+    }
+  ];
+  const addExpense = e => {
+    const expense = e.detail;
+    expenses = [...expenses, expense];
+    activeItem = "Current Expenses";
+  };
+  const updateAmount = e => {
+    const { id, friend } = e.detail;
+    let updatedExpenses = [...expenses];
+    updatedExpenses[0].amount = 200;
+    expenses = updatedExpenses;
   };
 </script>
 
@@ -22,11 +57,9 @@
 <Header />
 <main>
   <Tabs {items} {activeItem} on:tab-change={tabChange} />
-  {#if activeItem === 'Current Polls'}
-    <p>Poll List Component goes here</p>
+  {#if activeItem === 'Current Expenses'}
+    <ExpenseList {expenses} {friends} on:update-amount={updateAmount} />
   {:else if activeItem === 'Add New Expense'}
-    <CreateExpense />
+    <CreateExpense {friends} on:add-expense={addExpense} />
   {/if}
 </main>
-
-<Footer />
