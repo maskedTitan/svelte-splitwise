@@ -25,14 +25,7 @@
       name: "Harry"
     }
   ];
-  let expenses = [
-    {
-      id: Math.random() * Date.now(),
-      event: "Birthday Treat",
-      amount: 400,
-      description: "Treat for my 22nd Birthday"
-    }
-  ];
+
   const addExpense = e => {
     const expense = e.detail;
     expenses = [...expenses, expense];
@@ -58,7 +51,7 @@
 <main>
   <Tabs {items} {activeItem} on:tab-change={tabChange} />
   {#if activeItem === 'Current Expenses'}
-    <ExpenseList {expenses} {friends} on:update-amount={updateAmount} />
+    <ExpenseList {friends} on:update-amount={updateAmount} />
   {:else if activeItem === 'Add New Expense'}
     <CreateExpense {friends} on:add-expense={addExpense} />
   {/if}

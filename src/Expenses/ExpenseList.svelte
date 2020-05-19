@@ -1,6 +1,12 @@
 <script>
+  import ExpenseStore from "../Stores/ExpenseStore.js";
   import ExpenseDetails from "./ExpenseDetails.svelte";
-  export let expenses, friends;
+  export let expenses,
+    friends = [];
+
+  ExpenseStore.subscribe(data => {
+    expenses = data;
+  });
 </script>
 
 <style>
