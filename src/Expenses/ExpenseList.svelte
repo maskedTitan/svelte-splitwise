@@ -1,12 +1,16 @@
 <script>
+  import { onDestroy, onMount } from "svelte";
   import ExpenseStore from "../Stores/ExpenseStore.js";
   import ExpenseDetails from "./ExpenseDetails.svelte";
-  export let expenses,
-    friends = [];
+  export let friends = [];
 
-  ExpenseStore.subscribe(data => {
-    expenses = data;
-  });
+  //   const unsub = ExpenseStore.subscribe(data => {
+  //     expenses = data;
+  //   });
+
+  //   onDestroy(() => {
+  //     unsub();
+  //   });
 </script>
 
 <style>
@@ -18,7 +22,7 @@
 </style>
 
 <div class="expense-list">
-  {#each expenses as expense (expense.id)}
+  {#each $ExpenseStore as expense (expense.id)}
     <ExpenseDetails {expense} {friends} on:update-amount />
   {/each}
 

@@ -11,24 +11,8 @@
   const tabChange = e => {
     activeItem = e.detail;
   };
-  let friends = [
-    {
-      id: 1,
-      name: "John Doe"
-    },
-    {
-      id: 2,
-      name: "Brian"
-    },
-    {
-      id: 3,
-      name: "Harry"
-    }
-  ];
 
-  const addExpense = e => {
-    const expense = e.detail;
-    expenses = [...expenses, expense];
+  const addExpense = () => {
     activeItem = "Current Expenses";
   };
   const updateAmount = e => {
@@ -51,7 +35,7 @@
 <main>
   <Tabs {items} {activeItem} on:tab-change={tabChange} />
   {#if activeItem === 'Current Expenses'}
-    <ExpenseList {friends} on:update-amount={updateAmount} />
+    <ExpenseList on:update-amount={updateAmount} />
   {:else if activeItem === 'Add New Expense'}
     <CreateExpense {friends} on:add-expense={addExpense} />
   {/if}

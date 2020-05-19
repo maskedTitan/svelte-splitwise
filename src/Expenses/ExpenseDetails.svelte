@@ -1,11 +1,12 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import FriendStore from "../Stores/FriendStore.js";
+
   import Card from "../UI/Card.svelte";
 
   const dispatch = createEventDispatcher();
   export let expense;
   let defaultFriend = [""];
-  export let friends;
 
   function join(defaultFriend) {
     if (defaultFriend.length === 1) return defaultFriend[0];
@@ -48,7 +49,7 @@
     </div>
     <p>Split Expense with:</p>
     <div class="friends">
-      {#each friends as friend (friend.id)}
+      {#each $FriendStore as friend (friend.id)}
         <label
           on:click={() => {
             updateAmount(friend.name, friend.id);
