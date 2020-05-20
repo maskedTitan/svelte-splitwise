@@ -61,11 +61,7 @@
   .form-field {
     margin: 18px auto;
   }
-  .friends-field {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
+
   input {
     width: 100%;
     border-radius: 6px;
