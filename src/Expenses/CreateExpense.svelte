@@ -5,8 +5,6 @@
 
   const dispatch = createEventDispatcher();
 
-  export let friends;
-
   let fields = {
     event: "",
     amount: "",
@@ -63,6 +61,11 @@
   .form-field {
     margin: 18px auto;
   }
+  .friends-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
   input {
     width: 100%;
     border-radius: 6px;
@@ -97,14 +100,8 @@
     <div class:error={isValid === false}>{errors.amount}</div>
   </div>
   <div class="form-field">
-    <label for="description">Description</label>
+    <label for="description">Description [optional]</label>
     <textarea type="text" id="description" bind:value={fields.description} />
-  </div>
-  <div class="form-field">
-    <label for="description">Friends</label>
-    {#each friends as friend}
-      <p>{friend.name}</p>
-    {/each}
   </div>
 
   <Button type="secondary" flat>Add Expense</Button>

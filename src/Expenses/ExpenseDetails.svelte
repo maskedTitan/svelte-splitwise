@@ -1,12 +1,10 @@
 <script>
-  import { createEventDispatcher } from "svelte";
   import FriendStore from "../Stores/FriendStore.js";
-
+  import ExpenseStore from "../Stores/ExpenseStore.js";
   import Card from "../UI/Card.svelte";
 
-  const dispatch = createEventDispatcher();
   export let expense;
-  let defaultFriend = [""];
+  let defaultFriend = "";
 
   function join(defaultFriend) {
     if (defaultFriend.length === 1) return defaultFriend[0];
@@ -15,9 +13,16 @@
     }`;
   }
   function updateAmount(friend, id) {
-    dispatch("update-amount", {
-      friend,
-      id
+    ExpenseStore.update(currentExpenses => {
+      const checkboxCount = document.querySelectorAll(
+        'input[type="checkbox"]:checked'
+      );
+      let updatedExpenses = [...currentExpenses];
+      console.log($ExpenseStore[0].amount);
+
+      updatedExpenses[0].amount = (400 / (checkboxCount.length + 1)).toFixed(2);
+
+      return updatedExpenses;
     });
   }
 </script>

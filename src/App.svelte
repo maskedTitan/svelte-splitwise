@@ -4,7 +4,7 @@
   import Tabs from "./UI/Tabs.svelte";
   import CreateExpense from "./Expenses/CreateExpense.svelte";
   import ExpenseList from "./Expenses/ExpenseList.svelte";
-
+  import FriendsList from "./Friends/FriendsList.svelte";
   let items = ["Current Expenses", "Add New Expense"];
   let activeItem = "Current Expenses";
 
@@ -14,12 +14,6 @@
 
   const addExpense = () => {
     activeItem = "Current Expenses";
-  };
-  const updateAmount = e => {
-    const { id, friend } = e.detail;
-    let updatedExpenses = [...expenses];
-    updatedExpenses[0].amount = 200;
-    expenses = updatedExpenses;
   };
 </script>
 
@@ -35,8 +29,9 @@
 <main>
   <Tabs {items} {activeItem} on:tab-change={tabChange} />
   {#if activeItem === 'Current Expenses'}
-    <ExpenseList on:update-amount={updateAmount} />
+    <ExpenseList />
   {:else if activeItem === 'Add New Expense'}
-    <CreateExpense {friends} on:add-expense={addExpense} />
+    <CreateExpense on:add-expense={addExpense} />
+    <FriendsList />
   {/if}
 </main>

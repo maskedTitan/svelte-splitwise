@@ -23,7 +23,7 @@
 
 <div class="expense-list">
   {#each $ExpenseStore as expense (expense.id)}
-    <ExpenseDetails {expense} {friends} on:update-amount />
+    <ExpenseDetails {expense} {friends} />
   {/each}
 
 </div>
