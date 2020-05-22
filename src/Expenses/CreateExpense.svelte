@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import expenses from "../Stores/ExpenseStore.js";
+  import expenses, { duplicateExpenses } from "../Stores/ExpenseStore.js";
   import Button from "../UI/Button.svelte";
 
   const dispatch = createEventDispatcher();
@@ -44,6 +44,7 @@
       };
       //save expense to store
       expenses.addExpense(expense);
+      console.log(duplicateExpenses);
       dispatch("add-expense");
     }
   };

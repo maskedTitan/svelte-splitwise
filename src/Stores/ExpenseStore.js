@@ -1,13 +1,17 @@
 import { writable } from 'svelte/store';
 
-const expenses = writable([
+let expensesData = [
 	{
 		id: 1,
 		event: 'Birthday Treat',
 		amount: 400,
 		description: 'Treat for my 22nd Birthday'
 	}
-]);
+];
+
+const expenses = writable(expensesData);
+
+export let duplicateExpenses = [ ...expensesData ];
 
 const customExpenseStore = {
 	subscribe: expenses.subscribe,
@@ -16,6 +20,7 @@ const customExpenseStore = {
 			...expenseData,
 			id: Math.random() * Date.now()
 		};
+		duplicateExpenses.push(newExpense);
 		expenses.update((items) => {
 			return [ newExpense, ...items ];
 		});
@@ -23,7 +28,7 @@ const customExpenseStore = {
 	updateAmount: (id, newAmount) => {
 		expenses.update((items) => {
 			const expenseIndex = items.findIndex((i) => i.id === id);
-			const updatedExpense = { ...items[expenseIndex], newAmount };
+			const updatedExpense = { ...items[expenseIndex], amount: newAmount };
 			const updatedExpenses = [ ...items ];
 			updatedExpenses[expenseIndex] = updatedExpense;
 
@@ -33,22 +38,3 @@ const customExpenseStore = {
 };
 
 export default customExpenseStore;
-
-// {
-//     id: Math.random() * Date.now(),
-//     event: 'Birthday Treat',
-//     amount: 400,
-//     description: 'Treat for my 22nd Birthday',
-//     friends: [{
-// 	id: 1,
-// 	name: 'John Doe'
-// },
-// {
-// 	id: 2,
-// 	name: 'Brian'
-// },
-// {
-// 	id: 3,
-// 	name: 'Harry'
-// }]
-// }

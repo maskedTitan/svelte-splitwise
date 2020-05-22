@@ -1,6 +1,6 @@
 <script>
   import FriendStore from "../Stores/FriendStore.js";
-  import expenses from "../Stores/ExpenseStore.js";
+  import expenses, { duplicateExpenses } from "../Stores/ExpenseStore.js";
   import Card from "../UI/Card.svelte";
 
   export let expense;
@@ -16,36 +16,16 @@
     const checkboxCount = document.querySelectorAll(
       'input[type="checkbox"]:checked'
     );
-    let updatedAmount = 60;
+    const expenseIndex = duplicateExpenses.findIndex(
+      expense => expense.id === id
+    );
+
+    let updatedAmount = (
+      duplicateExpenses[expenseIndex].amount /
+      (checkboxCount.length + 1)
+    ).toFixed(2); //for testing
+
     expenses.updateAmount(id, updatedAmount);
-
-    // expenses.updateAmount(currentExpenses => {
-    //   const checkboxCount = document.querySelectorAll(
-    //     'input[type="checkbox"]:checked'
-    //   );
-    //   const expenseIndex = currentExpenses.findIndex(
-    //     expense => expense.id === id
-    //   );
-    //   let updatedExpenses = { ...ExpenseStore[expenseIndex], amount: 3000 };
-    // updatedExpenses[expenseIndex].amount = (
-    //   updatedExpenses[expenseIndex].amount /
-    //   (checkboxCount.length + 1)
-    // ).toFixed(2);
-    // updatedExpenses[expenseIndex] = {
-    //   ...updatedExpenses[expenseIndex],
-    //   amount: (amount / (checkboxCount.length + 1)).toFixed(2)
-    // };
-    // updatedExpenses.filter(
-    //   expense =>
-    //     (expense.amount = (
-    //       expense.amount /
-    //       (checkboxCount.length + 1)
-    //     ).toFixed(2))
-    // );
-    //  updatedExpenses[0].amount = (400 / (checkboxCount.length + 1)).toFixed(2);
-
-    //   return updatedExpenses;
-    // });
   }
 </script>
 
