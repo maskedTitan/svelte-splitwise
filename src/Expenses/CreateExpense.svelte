@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import ExpenseStore from "../Stores/ExpenseStore.js";
+  import expenses from "../Stores/ExpenseStore.js";
   import Button from "../UI/Button.svelte";
 
   const dispatch = createEventDispatcher();
@@ -40,13 +40,10 @@
     }
     if (isValid) {
       let expense = {
-        ...fields,
-        id: Math.random() * Date.now()
+        ...fields
       };
       //save expense to store
-      ExpenseStore.update(currentExpenses => {
-        return [expense, ...currentExpenses];
-      });
+      expenses.addExpense(expense);
       dispatch("add-expense");
     }
   };

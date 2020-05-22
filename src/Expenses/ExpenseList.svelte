@@ -3,14 +3,6 @@
   import ExpenseStore from "../Stores/ExpenseStore.js";
   import ExpenseDetails from "./ExpenseDetails.svelte";
   export let friends = [];
-
-  //   const unsub = ExpenseStore.subscribe(data => {
-  //     expenses = data;
-  //   });
-
-  //   onDestroy(() => {
-  //     unsub();
-  //   });
 </script>
 
 <style>

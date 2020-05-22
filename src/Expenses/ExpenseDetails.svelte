@@ -1,6 +1,6 @@
 <script>
   import FriendStore from "../Stores/FriendStore.js";
-  import ExpenseStore from "../Stores/ExpenseStore.js";
+  import expenses from "../Stores/ExpenseStore.js";
   import Card from "../UI/Card.svelte";
 
   export let expense;
@@ -12,18 +12,40 @@
       defaultFriend[defaultFriend.length - 1]
     }`;
   }
-  function updateAmount(friend, id) {
-    ExpenseStore.update(currentExpenses => {
-      const checkboxCount = document.querySelectorAll(
-        'input[type="checkbox"]:checked'
-      );
-      let updatedExpenses = [...currentExpenses];
-      console.log($ExpenseStore[0].amount);
+  function handleUpdate(friend, id) {
+    const checkboxCount = document.querySelectorAll(
+      'input[type="checkbox"]:checked'
+    );
+    let updatedAmount = 60;
+    expenses.updateAmount(id, updatedAmount);
 
-      updatedExpenses[0].amount = (400 / (checkboxCount.length + 1)).toFixed(2);
+    // expenses.updateAmount(currentExpenses => {
+    //   const checkboxCount = document.querySelectorAll(
+    //     'input[type="checkbox"]:checked'
+    //   );
+    //   const expenseIndex = currentExpenses.findIndex(
+    //     expense => expense.id === id
+    //   );
+    //   let updatedExpenses = { ...ExpenseStore[expenseIndex], amount: 3000 };
+    // updatedExpenses[expenseIndex].amount = (
+    //   updatedExpenses[expenseIndex].amount /
+    //   (checkboxCount.length + 1)
+    // ).toFixed(2);
+    // updatedExpenses[expenseIndex] = {
+    //   ...updatedExpenses[expenseIndex],
+    //   amount: (amount / (checkboxCount.length + 1)).toFixed(2)
+    // };
+    // updatedExpenses.filter(
+    //   expense =>
+    //     (expense.amount = (
+    //       expense.amount /
+    //       (checkboxCount.length + 1)
+    //     ).toFixed(2))
+    // );
+    //  updatedExpenses[0].amount = (400 / (checkboxCount.length + 1)).toFixed(2);
 
-      return updatedExpenses;
-    });
+    //   return updatedExpenses;
+    // });
   }
 </script>
 
@@ -57,7 +79,7 @@
       {#each $FriendStore as friend (friend.id)}
         <label
           on:click={() => {
-            updateAmount(friend.name, friend.id);
+            handleUpdate(friend.name, expense.id);
           }}>
           <input
             type="checkbox"
