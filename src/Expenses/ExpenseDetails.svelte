@@ -2,6 +2,7 @@
   import FriendStore from "../Stores/FriendStore.js";
   import expenses, { duplicateExpenses } from "../Stores/ExpenseStore.js";
   import Card from "../UI/Card.svelte";
+  import Button from "../UI/Button.svelte";
 
   export let expense;
   let defaultFriend = "";
@@ -23,23 +24,34 @@
     let updatedAmount = (
       duplicateExpenses[expenseIndex].amount /
       (checkboxCount.length + 1)
-    ).toFixed(2); //for testing
+    ).toFixed(2);
 
     expenses.updateAmount(id, updatedAmount);
   }
 </script>
 
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
   .expense {
     text-align: center;
+    background: #1f4068;
+    color: #f8f3eb;
+    font-family: "Poppins", sans-serif;
   }
   h3 {
+    padding-top: 1rem;
     margin: 0 auto;
-    color: #555;
+    color: #f8f3eb;
+    font-size: 30px;
+  }
+  p {
+    padding-bottom: 1rem;
+    font-weight: bold;
   }
   .friends {
     display: flex;
     flex-direction: column;
+    font-weight: 400;
   }
 </style>
 

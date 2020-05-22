@@ -71,6 +71,7 @@
   label {
     margin: 10px 10px;
     text-align: left;
+    color: white;
   }
   .error {
     font-weight: bold;

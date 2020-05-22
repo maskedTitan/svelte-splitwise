@@ -1,6 +1,6 @@
 <style>
   header {
-    background: #45046a;
+    background: #1b1b2f;
     padding: 20px;
   }
   h1 {

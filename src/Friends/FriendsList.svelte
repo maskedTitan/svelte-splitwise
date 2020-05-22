@@ -57,6 +57,9 @@
     font-family: "Roboto Slab", serif;
     text-align: center;
   }
+  h3 {
+    color: white;
+  }
   h4 {
     font-family: "Roboto Slab", serif;
     font-weight: bold;
@@ -94,7 +97,7 @@
         <div class:error={isValid === false}>{error}</div>
       {/if}
       <input type="text" bind:value={newFriend.name} />
-      <Button type="primary" flat>Add Friend</Button>
+      <Button type="secondary" flat>Add Friend</Button>
     </div>
   </form>
 </div>
