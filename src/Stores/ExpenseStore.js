@@ -34,6 +34,11 @@ const customExpenseStore = {
 
 			return updatedExpenses;
 		});
+	},
+	removeExpense: (id) => {
+		expenses.update((items) => {
+			return items.filter((item) => item.id !== id);
+		});
 	}
 };
 

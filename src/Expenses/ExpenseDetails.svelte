@@ -7,6 +7,12 @@
   export let expense;
   let defaultFriend = "";
 
+  let expenseList = "";
+
+  const unsubscribe = expenses.subscribe(items => {
+    expenseList = items;
+  });
+
   function join(defaultFriend) {
     if (defaultFriend.length === 1) return defaultFriend[0];
     return `${defaultFriend.slice(0, -1).join(", ")} and ${
@@ -28,6 +34,13 @@
 
     expenses.updateAmount(id, updatedAmount);
   }
+
+  function handleRemove() {
+    expenses.removeExpense(expense.id);
+  }
+  function displayAlert() {
+    console.log("no expenses");
+  }
 </script>
 
 <style>
@@ -38,6 +51,7 @@
     color: #f8f3eb;
     font-family: "Poppins", sans-serif;
   }
+
   h3 {
     padding-top: 1rem;
     margin: 0 auto;
@@ -47,6 +61,7 @@
   p {
     padding-bottom: 1rem;
     font-weight: bold;
+    color: whitesmoke;
   }
   .friends {
     display: flex;
@@ -86,5 +101,8 @@
     {:else}
       <p>Splitting expense with {join(defaultFriend)}</p>
     {/if}
+    <Button mode="primary">
+      <span on:click={handleRemove}>Remove Expense</span>
+    </Button>
   </div>
 </Card>
