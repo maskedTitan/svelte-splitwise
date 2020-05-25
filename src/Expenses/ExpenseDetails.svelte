@@ -76,11 +76,13 @@
     <div class="amount">
       <p>Amount: {expense.amount} $</p>
     </div>
-    <div class="description">
-      {#if expense.description}
+    {#if expense.description}
+      <div class="description">
+
         <p>Description: {expense.description}</p>
-      {/if}
-    </div>
+
+      </div>
+    {/if}
     <p>Split Expense with:</p>
     <div class="friends">
       {#each $FriendStore as friend (friend.id)}
